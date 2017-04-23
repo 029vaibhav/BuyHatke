@@ -96,6 +96,7 @@ public class WebViewActivity extends AppCompatActivity implements ClickEvent {
         try {
             Myntra session = (Myntra) submit.get();
             this.session = session.getSession();
+            executorService.shutdown();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -149,7 +150,6 @@ public class WebViewActivity extends AppCompatActivity implements ClickEvent {
                     try {
                         String str = new String(response.body().bytes());
                         String[] split = str.split("~");
-                        split[0] = "Myntranew1000";
                         applyCoupons(split);
 
                     } catch (IOException e) {
@@ -221,6 +221,7 @@ public class WebViewActivity extends AppCompatActivity implements ClickEvent {
         } catch (IOException e) {
             Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT).show();
         }
+        executorService.shutdown();
         return s1;
     }
 
